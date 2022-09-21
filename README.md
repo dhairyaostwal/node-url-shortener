@@ -4,6 +4,8 @@
 
 A simple URL Shortner REST API that uses `shortid` npm package to generate short endpoints for your long URL. The User can also specify `custom_end_param` which is essentially a customised endpoint for their long URL.
 
+<img src="./public/static/project-ss.png"/>
+
 ## Features
 
 1. URL Shorten - custom, default parameters
