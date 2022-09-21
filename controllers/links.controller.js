@@ -24,7 +24,6 @@ const getAllLinks = async (req, res) => {
 
 const getALink = async (req, res) => {
   try {
-    console.log(req.params);
     const { id: linkId } = req.params;
     const shorturl = await ShortURL.findOne({ _id: linkId });
     if (!shorturl) {
@@ -39,7 +38,6 @@ const getALink = async (req, res) => {
 
 const getALinkUsingCustomEndpoint = async (req, res) => {
   try {
-    console.log(req.params);
     const { custom_endpoint: endpoint } = req.params;
     const shorturl = await ShortURL.findOne({ custom_end_param: endpoint });
     if (!shorturl) {
@@ -57,7 +55,6 @@ const getALinkUsingCustomEndpoint = async (req, res) => {
 const createNewLink = async (req, res) => {
   try {
     const { custom_end_param: customisedEndpoint } = req.body;
-    console.log(customisedEndpoint);
     const endpointAlreadyInUse = await ShortURL.exists({
       custom_end_param: customisedEndpoint,
     });
