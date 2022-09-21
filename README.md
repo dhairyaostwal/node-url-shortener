@@ -2,7 +2,7 @@
 
 <i>Built with :heart: in NodeJS</i>
 
-A simple URL Shortner CRUD API that uses `shortid` npm package to generate short endpoints for your long URL. The User can also specify `custom_end_param` which is essentially a customised endpoint for their long URL.
+A simple URL Shortner REST API that uses `shortid` npm package to generate short endpoints for your long URL. The User can also specify `custom_end_param` which is essentially a customised endpoint for their long URL.
 
 ## Features
 
