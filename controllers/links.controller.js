@@ -2,10 +2,23 @@ const ShortURL = require('../models/ShortURLSchema');
 
 const getAllLinks = async (req, res) => {
   try {
-    const shorturls = await ShortURL.find({});
-    res.status(200).json({ shorturls });
+    const { page = 1, limit = 10, sort } = req.query;
+
+    const shorturls = await ShortURL.find({})
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .sort(sort == 'desc' ? { created_at: -1 } : { created_at: 1 })
+      .exec();
+
+    const count = await ShortURL.countDocuments();
+
+    res.status(200).json({
+      shorturls,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page,
+    });
   } catch (error) {
-    res.status(500).json({ msg: error });
+    res.status(500).json({ msg: error.message });
   }
 };
 
