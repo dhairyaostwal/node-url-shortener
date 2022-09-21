@@ -2,6 +2,9 @@
 
 <i>Built with :heart: in NodeJS</i>
 
+[![API Documentation - Read here](https://img.shields.io/static/v1?label=API+Documentation&message=Read+here&color=2ea44f&style=for-the-badge&logo=postman&logoColor=orange)](https://documenter.getpostman.com/view/14800951/2s7Z12F3fE)
+[![Tweet  - @dhairyaostwal](https://img.shields.io/static/v1?label=Tweet+&message=%40dhairyaostwal&color=2ea44f&style=for-the-badge&logo=twitter&logoColor=blue)](https://twitter.com/dhairyaostwal)
+
 A simple URL Shortner REST API that uses `shortid` npm package to generate short endpoints for your long URL. The User can also specify `custom_end_param` which is essentially a customised endpoint for their long URL.
 
 <img src="./public/static/project-ss.png"/>
