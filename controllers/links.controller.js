@@ -24,13 +24,31 @@ const getAllLinks = async (req, res) => {
 
 const getALink = async (req, res) => {
   try {
+    console.log(req.params);
     const { id: linkId } = req.params;
     const shorturl = await ShortURL.findOne({ _id: linkId });
     if (!shorturl) {
       return res.status(404).json({ msg: `No link with id: ${linkId}` });
     }
 
-    res.status(200).json(shorturl);
+    res.status(200).redirect(shorturl.original_link);
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+const getALinkUsingCustomEndpoint = async (req, res) => {
+  try {
+    console.log(req.params);
+    const { custom_endpoint: endpoint } = req.params;
+    const shorturl = await ShortURL.findOne({ custom_end_param: endpoint });
+    if (!shorturl) {
+      return res
+        .status(404)
+        .json({ msg: `No URL with endpoint: ${endpoint} assigned` });
+    }
+
+    res.status(200).redirect(shorturl.original_link);
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
@@ -98,4 +116,5 @@ module.exports = {
   getALink,
   editALink,
   deleteALink,
+  getALinkUsingCustomEndpoint,
 };
