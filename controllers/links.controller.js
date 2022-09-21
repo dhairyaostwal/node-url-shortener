@@ -32,16 +32,28 @@ const getALink = async (req, res) => {
 
     res.status(200).json(shorturl);
   } catch (error) {
-    res.status(500).json({ msg: error });
+    res.status(500).json({ msg: error.message });
   }
 };
 
 const createNewLink = async (req, res) => {
   try {
+    const { custom_end_param: customisedEndpoint } = req.body;
+    console.log(customisedEndpoint);
+    const endpointAlreadyInUse = await ShortURL.exists({
+      custom_end_param: customisedEndpoint,
+    });
+
+    if (endpointAlreadyInUse) {
+      return res.status(404).json({
+        msg: `Already assigned URL with endpoint: ${req.body.custom_end_param}`,
+      });
+    }
+
     const shorturl = await ShortURL.create(req.body);
     res.status(201).json({ shorturl });
   } catch (error) {
-    res.status(500).json({ msg: error });
+    res.status(500).json({ msg: error.message });
   }
 };
 
@@ -62,7 +74,7 @@ const editALink = async (req, res) => {
 
     res.status(200).json({ shorturl });
   } catch (error) {
-    res.status(500).json({ msg: error });
+    res.status(500).json({ msg: error.message });
   }
 };
 
@@ -76,7 +88,7 @@ const deleteALink = async (req, res) => {
 
     res.status(200).json({ msg: 'Task deleted successfully' });
   } catch (error) {
-    res.status(500).json({ msg: error });
+    res.status(500).json({ msg: error.message });
   }
 };
 
